@@ -18,13 +18,13 @@ CV (DOCX/PDF)
      │
      ▼
 ┌─────────────────────────────────────────────────────┐
-│              LangGraph Multi-Agent Pipeline          │
+│              LangGraph Multi-Agent Pipeline         │ 
 │                                                     │
-│  [Parse Agent] → [Retrieve Agent] → [Score Agent]  │
-│                         │                          │
+│  [Parse Agent] → [Retrieve Agent] → [Score Agent]   │
+│                         │                           │
 │                  FAISS Vector Store                 │
 │               (Azure Blob persistent)               │
-│                         │                          │
+│                         │                           │
 │                  [Report Agent]                     │
 └─────────────────────────────────────────────────────┘
      │
