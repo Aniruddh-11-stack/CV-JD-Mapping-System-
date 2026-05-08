@@ -183,5 +183,5 @@ Test run: 3 CVs × 3 JDs
 
 ## Author
 
-**Aniruddh** — GenAI Intern, UltraTech Cement  
+**Aniruddh**
 [anikulks@gmail.com](mailto:anikulks@gmail.com)
