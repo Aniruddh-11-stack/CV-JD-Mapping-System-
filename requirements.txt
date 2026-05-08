@@ -1,0 +1,67 @@
+# ============================================================
+# CV to JD Mapping System v2 — Python Dependencies
+# ============================================================
+
+# ------------------------------------
+# Core Framework
+# ------------------------------------
+streamlit>=1.35.0
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9        # FastAPI file uploads
+
+# ------------------------------------
+# LLM & Embeddings
+# ------------------------------------
+openai>=1.30.0                 # Supports Azure, OpenAI, Groq, Gemini (OpenAI-compatible)
+langchain>=0.2.0
+langchain-openai>=0.1.8        # AzureOpenAIEmbeddings, OpenAIEmbeddings
+langchain-community>=0.2.0     # HuggingFaceEmbeddings (local fallback)
+
+# ------------------------------------
+# LangGraph — Agent Orchestration
+# ------------------------------------
+langgraph>=0.1.14
+
+# ------------------------------------
+# Data Validation
+# ------------------------------------
+pydantic>=2.7.0
+pydantic-settings>=2.3.0       # BaseSettings with .env support
+
+# ------------------------------------
+# Vector Store
+# ------------------------------------
+faiss-cpu>=1.8.0               # Use faiss-gpu for GPU instances
+
+# ------------------------------------
+# PDF / DOCX Text Extraction
+# ------------------------------------
+pymupdf>=1.24.0                # fitz — fast PDF parsing
+mammoth>=1.7.0                 # DOCX extraction
+
+# ------------------------------------
+# OCR (optional — for scanned PDFs)
+# ------------------------------------
+ocrmypdf>=16.0.0               # Primary OCR (high quality)
+pytesseract>=0.3.10            # Fallback OCR
+pdf2image>=1.17.0              # Used with pytesseract
+
+# ------------------------------------
+# Azure Blob Storage
+# ------------------------------------
+azure-storage-blob>=12.20.0
+
+# ------------------------------------
+# Data Processing & Export
+# ------------------------------------
+pandas>=2.2.0
+xlsxwriter>=3.2.0              # Excel export
+numpy>=1.26.0
+
+# ------------------------------------
+# Utilities
+# ------------------------------------
+python-dotenv>=1.0.0           # .env loading (also handled by pydantic-settings)
+httpx>=0.27.0                  # Custom HTTP client (SSL cert support for UltraTech)
+tenacity>=8.3.0                # Retry logic

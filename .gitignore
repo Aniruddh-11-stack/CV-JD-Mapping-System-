@@ -1,0 +1,46 @@
+# ── Credentials & secrets (NEVER commit) ─────────────────────────────────────
+.env
+*.pem
+*.key
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Data & index files (large / user-specific) ────────────────────────────────
+data/faiss_jd_index/
+data/test_results.json
+data/test_run.log
+logs/
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── IDE ───────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Docker ───────────────────────────────────────────────────────────────────
+*.tar
+
+# ── Streamlit cache ───────────────────────────────────────────────────────────
+.streamlit/secrets.toml

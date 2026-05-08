@@ -1,0 +1,91 @@
+# ============================================================
+# CV to JD Mapping System v2 — Docker Compose
+# ============================================================
+# Runs two services:
+#   streamlit_ui  → port 8501  (Streamlit web interface)
+#   fastapi_api   → port 8000  (REST API)
+# Both share the same FAISS index via a mounted volume.
+
+version: "3.9"
+
+services:
+
+  # ----------------------------------------
+  # Streamlit UI
+  # ----------------------------------------
+  streamlit_ui:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cv-jd-mapper:v2
+    container_name: cv_jd_streamlit
+    command: >
+      streamlit run ui/app.py
+      --server.port=8501
+      --server.address=0.0.0.0
+      --server.headless=true
+      --server.maxUploadSize=200
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+      - FAISS_INDEX_PATH=/app/data/faiss_jd_index
+    volumes:
+      - faiss_data:/app/data
+      - app_logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ----------------------------------------
+  # FastAPI REST API
+  # ----------------------------------------
+  fastapi_api:
+    image: cv-jd-mapper:v2
+    container_name: cv_jd_api
+    command: >
+      uvicorn api.main:app
+      --host 0.0.0.0
+      --port 8000
+      --workers 2
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - PYTHONPATH=/app
+      - FAISS_INDEX_PATH=/app/data/faiss_jd_index
+    volumes:
+      - faiss_data:/app/data
+      - app_logs:/app/logs
+    depends_on:
+      - streamlit_ui
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+# ----------------------------------------
+# Named Volumes
+# ----------------------------------------
+volumes:
+  faiss_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data           # Persists on host at ./data/
+
+  app_logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./logs
