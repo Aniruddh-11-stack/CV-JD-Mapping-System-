@@ -1,6 +1,6 @@
 # CV ↔ JD Mapping System v2
 
-> **GenAI Internship Project — UltraTech Cement**  
+> **GenAI Project**  
 > An intelligent, multi-agent pipeline that matches candidate CVs to Job Descriptions using LLMs, semantic embeddings, and vector search.
 
 ---
